@@ -69,6 +69,38 @@ Voici le fichier `config.json` :
 }
 ```
 
+**🎫 Comment récupérer votre token Discord**
+
+> ⚠️ **Avertissement :** Le token de votre compte Discord est une **information sensible**. Ne le partagez **jamais** avec qui que ce soit. L'utilisation d'un token dans un selfbot enfreint les [Conditions d'utilisation de Discord](https://discord.com/terms) et peut entraîner un bannissement permanent de votre compte.
+
+### Étapes pour récupérer votre token :
+
+1. Ouvrez Discord.
+2. Appuyez sur `CTRL + SHIFT + I` pour ouvrir les outils développeur.
+3. Cliquez sur l’onglet **Console**.
+4. Copiez-collez le code suivant dans la console et appuyez sur **Entrée** :
+```js
+window.webpackChunkdiscord_app.push([
+  [Math.random()],
+  {},
+  req => {
+    if (!req.c) return;
+    for (const m of Object.keys(req.c)
+      .map(x => req.c[x].exports)
+      .filter(x => x)) {
+      if (m.default && m.default.getToken !== undefined) {
+        return copy(m.default.getToken());
+      }
+      if (m.getToken !== undefined) {
+        return copy(m.getToken());
+      }
+    }
+  },
+]);
+console.log('%cWorked!', 'font-size: 50px');
+console.log(`%cYou now have your token in the clipboard!`, 'font-size: 16px');
+```
+
 ---
 
 ## 🧯 Dépannage
