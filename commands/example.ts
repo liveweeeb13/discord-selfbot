@@ -1,0 +1,9 @@
+const { logMessage } = require('../utils/logs')
+
+module.exports = {
+    name: 'name',
+    description: 'description',
+    async execute(message) {
+       
+    }
+};
