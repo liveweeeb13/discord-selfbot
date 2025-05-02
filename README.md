@@ -119,8 +119,6 @@ Ce projet a été développé à des fins éducatives uniquement.
 Je ne cautionne en aucun cas les usages abusifs.
 <u>L'utilisateur est entièrement responsable de ses actions et de l'utilisation qu’il fait de ce selfbot.</u>
 
-Bien sûr ! Voici un paragraphe de conclusion adapté à ton README, avec un ton humain, clair, et respectueux :
-
 ---
 
 ## 🙏 Remerciements et conclusion
