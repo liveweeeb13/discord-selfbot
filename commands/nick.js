@@ -1,4 +1,4 @@
-const { logMessage } = require('../utils/logs');
+const logMessage = require('../utils/logs');
 
 module.exports = {
     name: 'nick',

@@ -1,4 +1,4 @@
-const { logMessage } = require('../utils/logs')
+const logMessage = require('../utils/logs')
 const config = require('../config.json')
 
 module.exports = {

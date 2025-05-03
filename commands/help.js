@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const config = require('../config.json');
-const { logMessage } = require('../utils/logs');
+const logMessage = require('../utils/logs');
 
 module.exports = {
     name: 'help',

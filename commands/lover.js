@@ -1,9 +1,9 @@
-const { logMessage } = require('../utils/logs');
+const logMessage = require('../utils/logs');
 const config = require('../config.json')
 
 module.exports = {
     name: 'lovemeter',
-    description: 'Mesure l\'amour entre deux utilisateurs',
+    description: 'Mesure l\'amour entre deux personnes.',
     async execute(message, args) {
         const user1 = message.mentions.users.at(0);
         const user2 = message.mentions.users.at(1);

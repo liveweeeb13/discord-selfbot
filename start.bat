@@ -2,7 +2,6 @@
 SETLOCAL
 
 IF NOT EXIST "node_modules" (
-    IF NOT EXIST "package-lock.json" (
         echo - Installation des dependances...
         npm install
     )

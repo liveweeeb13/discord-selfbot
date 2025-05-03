@@ -4,14 +4,14 @@ const path = require('path');
 function logMessage(message) {
     const now = new Date();
     const parisTime = new Intl.DateTimeFormat('fr-FR', {
-        timeZone: 'Europe/Paris',
+        timeZone: 'Europe/Paris', // Votre Fuseau Horaire : (./timezones.json)
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        hour12: false
+        hour12: false // Si vous voulez le format 12 heures
     }).formatToParts(now);
 
     const getPart = (type) => parisTime.find(p => p.type === type)?.value;
@@ -43,4 +43,4 @@ function logMessage(message) {
     console.log(logLine);
 }
 
-module.exports = { logMessage };
+module.exports = logMessage ;

@@ -1,14 +1,84 @@
-const { logMessage } = require('../utils/logs')
+const logMessage = require('../utils/logs')
 
 module.exports = {
     name: 'ping',
-    description: 'Tester le ping',
+    description: 'Affiche les latences.',
     async execute(message) {
-        let ping = Date.now() - message.createdTimestamp;
-        let roundedping = ping < 0 ? Math.round(ping * -1) : ping;
+        const startTime = Date.now();
+        const initialPing = Math.abs(Date.now() - message.createdTimestamp);
+        
+        await message.channel.sendTyping();
+        const testingMessage = await message.reply({ content: '*Mesure en cours...*' });
+
+        const endTime = Date.now();
+        const botPing = Math.abs(endTime - startTime);
+        const apiPing = Math.round(message.client.ws.ping);
+        const avgPing = Math.round((botPing + apiPing) / 2);
+
+        /**
+         * Détermine la couleur/emoji en fonction de la latence
+         * @param {string} type - Type de retour (img, emoji, hexColor)
+         * @param {number} ping - Valeur de latence
+         * @param {string} [forme=circle] - Forme de l'emoji (circle ou square)
+         * @returns {string} Retourne l'élément demandé
+         */
+        function getPingColor(type, ping, forme = 'circle') {
+            let lvlPing_;
+            
+            if (ping <= 0) {
+                lvlPing_ = -1;
+            } else if (ping > 0 && ping <= 500) {
+                lvlPing_ = 0; 
+            } else if (ping > 500 && ping <= 1000) {
+                lvlPing_ = 1;
+            } else if (ping > 1000 && ping <= 2250) {
+                lvlPing_ = 2;
+            } else if (ping > 2250 && ping <= 5000) {
+                lvlPing_ = 3; 
+            } else {
+                lvlPing_ = 4;
+            }
+
+            const styles = {
+                "-1": { hex: '#d3d3d3', square: '⬜', circle: '⚪' },
+                0: { hex: '#40d509', square: '🟩', circle: '🟢' },
+                1: { hex: '#ffd817', square: '🟨', circle: '🟡' },
+                2: { hex: '#f99325', square: '🟧', circle: '🟠' },
+                3: { hex: '#d00f0f', square: '🟥', circle: '🔴' },
+                4: { hex: '#7a0606', square: '⬛', circle: '⚫' }
+            };
+
+            switch (type) {
+                case 'img':
+                    return `https://singlecolorimage.com/get/${styles[lvlPing_].hex.replace('#', '')}`;
+                case 'emoji':
+                    return styles[lvlPing_][forme];
+                case 'hexColor':
+                    return styles[lvlPing_].hex;
+                default:
+                    return styles[lvlPing_].circle;
+            }
+        }
+
+        const emojis = {
+            bot: getPingColor('emoji', botPing),
+            api: getPingColor('emoji', apiPing),
+            time: getPingColor('emoji', initialPing),
+            avg: getPingColor('emoji', avgPing)
+        };
+        const pingImage = getPingColor('img', avgPing) + "/200x40.png";
+
+        await message.reply({
+            content: [
+                `🤖 Latence du Bot: \`${botPing}ms\` ${emojis.bot}`,
+                `🌐 Latence API: \`${apiPing}ms\` ${emojis.api}`,
+                `⏱ Temps Réponse: \`${initialPing}ms\` ${emojis.time}`,
+       //       `📊 Moyenne: \`${avgPing}ms\` ${emojis.avg}`
+            ].join('\n'),
+            files: [pingImage]
+        }).then(() => testingMessage.delete());
 
 
-        message.channel.send(`Mon ping est de ${roundedping}ms`);
-        await logMessage(message);
+        logMessage(message);
     }
-}
+};

@@ -1,7 +1,7 @@
 {
-    "token": "TOKEN",
     "prefix": "!",
     "wt": "1000",
     "just_usable_by_me": false,
-    "my_id": "ID"
-} 
+    "authorized_id": [""],
+    "admin_id": [""]
+}

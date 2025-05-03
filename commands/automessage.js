@@ -1,13 +1,15 @@
+const config = require('../config.json')
+const logMessage = require('../utils/logs')
+
 let interval = null;
 let timeout = null;
-const config = require('../config.json')
 
 module.exports = {
     name: 'automessage',
     description: 'Envoie un message automatique.',
     async execute(message, args) {
         if (args.length < 3) {
-            return message.reply(`❌ Utilisation incorrecte : \`${config.prefix}${this.name} <message> <delay en secondes> <durée en minute>\``)
+            return message.reply(`❌ Utilisation incorrecte : \`${config.prefix}${this.name} <message entre ""> <delay en secondes> <durée en minute>\``)
         }
 
         const delay = parseInt(args[args.length - 2], 10);
@@ -21,10 +23,12 @@ module.exports = {
             return message.reply('❌ La durée doit être entre 1 et 1000 minutes.');
         }
 
-        const text = args.slice(0, -2).join(' ');
+        const text = args.slice(0, -2).join(' ').replace(/"/g, "").replace(/'/g, "")
 
         if (interval) clearInterval(interval);
         if (timeout) clearTimeout(timeout);
+
+        message.channel.send(text) // Envoie direct apres la commande
 
         interval = setInterval(() => {
             message.channel.sendTyping();
@@ -36,10 +40,11 @@ module.exports = {
             interval = null;
 
 //          message.channel.send('🛑 Message automatique désactivé.');
-            console.log('🛑 AutoMessage désactivé')
+            console.log('🛑 AutoMessage désactivé automatiquement')
         }, duration * 60 * 1000);
 
 //      message.reply(`✅ Envoi de `${text}` toutes les ${delay}s pendant ${duration} minute(s) `);
         console.log('✅ AutoMessage activé')
+        await logMessage(message)
     }
 };

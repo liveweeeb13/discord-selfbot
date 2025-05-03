@@ -1,9 +1,10 @@
-const { logMessage } = require('../utils/logs')
+const logMessage = require('../utils/logs')
+const config = require('../config.json')
 
 module.exports = {
     name: 'join',
-    description: 'Rejoindre votre serveur Discord',
-    async execute(message, config) {
+    description: 'Rejoint votre serveur Discord',
+    async execute(message) {
         function isValidInvite(url) {
             return url.includes('discord.gg') || url.includes('discord.com/invite');
         }
@@ -18,7 +19,7 @@ module.exports = {
            return message.reply(`❌ Utilisation incorrecte : \`${config.prefix}${this.name} <lien_infini>\``) 
         }
 
-        message.reply(`✅ Merci de patienter pendant que mon humain résout le CAPTCHA. L'attente est estimée \`environ une semaine\`.`);
+        message.reply(`⏳ **Validation en attente** - Notre équipe doit vérifier manuellement votre demande d'accès.\n\n🔍 *Merci de patienter le temps qu\'un humain résolve le CAPTCHA (délai moyen : 2-3 jours).*\n\n✅ Vous recevrez une notification dès que votre accès sera approuvé.`);
         await logMessage(message);
     }
 };

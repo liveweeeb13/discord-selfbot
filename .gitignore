@@ -1,0 +1,20 @@
+# NodeJS .gitignore (By Befaci)
+
+node_modules
+
+# npm Packages
+package-lock.json
+# yarn
+yarn.lock
+# pnpm
+pnpm-lock*.yaml
+
+# Build things
+build
+dist
+
+# Caches
+*cache*
+
+# Non-example configs
+config.*
