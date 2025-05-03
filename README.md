@@ -15,19 +15,19 @@ Utilisez ce projet à vos propres risques.
 
 ## ⚙️ Installation
 
-1. **Clonez le dépôt**
+### 1. **Clonez le dépôt**
 
 ```bash
 git clone https://github.com/liveweeeb13/discord-selfbot.git
 ```
 
-2. **Accédez au dossier**
+### 2. **Accédez au dossier**
 
 ```bash
 cd discord-selfbot
 ```
 
-3. **Installation des dépendances**
+### 3. **Installation des dépendances**
 
 * Sur **Windows** : il vous suffit d’exécuter le fichier `start.bat` (il installera automatiquement les dépendances).
 
@@ -35,37 +35,26 @@ cd discord-selfbot
 
 ```bash
 npm install
-```
+```  
 
-4. **Lancement du bot**
 
-* Sur **Windows** : relancez simplement `start.bat`.
-
-* Sur **Linux/macOS** :
-
-```bash
-node main.js
-```
-
-ou
-
-```bash
-npm run start
-```
-
----
-
-## 🛠️ Configuration
+### 4. **Configuration**
 
 Voici le fichier `config.json` :
 
 ```json
 {
-    "token": "TOKEN",              // Votre token Discord
-    "prefix": "!",                 // Préfixe des commandes
+    "prefix": "!",                  // Préfixe des commandes
     "wt": "1000",                  // Temps d'attente avant l'exécution d'une commande (en ms)
     "just_usable_by_me": false,   // Si true, seul l’utilisateur avec l’ID défini peut utiliser le bot
-    "my_id": "ID"                 // L’ID Discord autorisé (si just_usable_by_me est true)
+    "authorized_id": [""],       // Liste d'’ID Discord autorisé (si just_usable_by_me est true)
+    "admin_id": [""]            // Liste des administrateurs autorisés à utiliser les commandes critiques
+}
+```
+Et voici le fichier `sensibles.json` :
+```json
+{
+    "token": "TOKEN"       // Le token de votre compte
 }
 ```
 
@@ -73,7 +62,7 @@ Voici le fichier `config.json` :
 
 > ⚠️ **Avertissement :** Le token de votre compte Discord est une **information sensible**. Ne le partagez **jamais** avec qui que ce soit. L'utilisation d'un token dans un selfbot enfreint les [Conditions d'utilisation de Discord](https://discord.com/terms) et peut entraîner un bannissement permanent de votre compte.
 
-### Étapes pour récupérer votre token :
+**Étapes pour récupérer votre token :**
 
 1. Ouvrez Discord.
 2. Appuyez sur `CTRL + SHIFT + I` pour ouvrir les outils développeur.
@@ -101,6 +90,21 @@ console.log('%cWorked!', 'font-size: 50px');
 console.log(`%cYou now have your token in the clipboard!`, 'font-size: 16px');
 ```
 
+### 5. **Lancement du bot**
+
+* Sur **Windows** : relancez simplement `start.bat`.
+
+* Sur **Linux/macOS** :
+
+```bash
+node main.js
+```
+
+ou
+
+```bash
+npm run start
+```
 ---
 
 ## 🧯 Dépannage
