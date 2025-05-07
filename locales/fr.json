@@ -1,0 +1,148 @@
+{
+    "main": {
+        "msg1": "❌ Une erreur est survenue. Ce n9est pas normal 😕",
+        "msg2": "Salut je ne suis pas un robot mais tu devrais essayer de faire"
+    },
+    "breathe": {
+        "msg1": "Tu viens de respirer. GG 🫁",
+        "msg2": "Respiration réussie ✔️",
+        "msg3": "N'oublie pas d'expirer aussi ! 😮‍💨",
+        "msg4": "Inspire... expire... Voilà, tu vas mieux 😌",
+        "msg5": "Bien joué, une respiration de plus !"
+    },
+    "botinfo": {
+        "msg1": "Voici mes informations :",
+        "msg2": "➡️ Mon préfixe:",
+        "msg4": "➡️ Je suis en ligne depuis :",
+        "msg5": "➡️ Je suis en version"
+    },
+    "8ball": {
+        "msg1": "Essaye plus tard",
+        "msg2": "Essaye encore",
+        "msg3": "Pas d'avis",
+        "msg4": "C'est ton destin",
+        "msg5": "Le sort en est jeté",
+        "msg6": "Une chance sur deux",
+        "msg7": "Repose ta question",
+        "msg8": "D'après moi oui",
+        "msg9": "C'est certain",
+        "msg10": "Oui absolument",
+        "msg11": "Tu peux compter dessus",
+        "msg12": "Sans aucun doute",
+        "msg13": "Très probable",
+        "msg14": "Oui",
+        "msg15": "C'est bien parti",
+        "msg16": "C'est non",
+        "msg17": "Peu probable",
+        "msg18": "Faut pas rêver",
+        "msg19": "N'y compte pas",
+        "msg20": "Impossible"
+    },
+    "automessage": {
+        "msg1": "message entre 99",
+        "msg2": "delais en secondes",
+        "msg3": "durée en minute",
+        "msg4": "❌ Le délai doit être entre 1 et 3600 secondes.",
+        "msg5": "❌ La durée doit être entre 1 et 1000 minutes.",
+        "msg6": "🛑 Message automatique désactivé.",
+        "msg7": "✅ Envoi de `[text]` toutes les [delay]sec pendant [duration] minute(s)"
+    },
+    "config": {
+        "msg1": "🔧 Mon prefix est",
+        "msg2": "⏱️ Mon temps de réponse est de",
+        "msg3": "🔒 Je suis en mode privé",
+        "msg4": "🔓 Je suis en mode publique",
+        "msg5": "👤 Utilisateurs qui peuvent m'utiliser en mode privé :",
+        "msg6": "🛡️ Utilisateurs administrateurs :"
+    },
+    "credits": {
+        "msg1": "Voici mes credits:",
+        "msg2": "Développeur",
+        "msg3": "Aide au développement",
+        "msg4": "Code source"
+    },
+    "join": {
+        "msg1": "lien_infini",
+        "msg2": "⏳ **Validation en attente** - Notre équipe doit vérifier manuellement votre demande d'accès.\n\n🔍 *Merci de patienter le temps qu un humain résolve le CAPTCHA (délai moyen : 2-3 jours).*\n\n✅ Vous recevrez une notification dès que votre accès sera approuvé."
+    },
+    "lang": {
+        "msg1": "Merci de mettre une langue dans cette liste",
+        "msg2": "Votre langue actuelle"
+    },
+    "love":{
+        "msg1": "user",
+        "msg2": "❌ Vous ne pouvez pas comparer la même personne deux fois !",
+        "msg3": "sont compatibles à"
+    },
+    "hack": {
+        "msg1": "❌ Impossible de me hacker ! 😎",
+        "msg2": "❌ Tu veux vraiment hacker toi-même ? 🤔",
+        "msg3": "💻 Initialisation du hack sur",
+        "msg4": "🔍 Analyse du système de",
+        "msg5": "🛠️ Exploitation des failles de sécurité...",
+        "msg6": "📡 Connexion au serveur principal...",
+        "msg7": "🔑 Tentative de récupération du mot de passe",
+        "msg8": "💾 Téléchargement des données sensibles...",
+        "msg9": "🍟 Injection de frites dans le système... 🍟",
+        "msg10": "⚠️ Détection par l'antivirus !",
+        "msg11": "❌ Hack interrompu. [target.username] est trop fort(e) !"
+    },
+    "maths": {
+        "msg1": "calcul ou help",
+        "msg2": "📘 Aide : Commande !math\n\nSyntaxe : !math <expression>\n\nOpérations supportées :\n- +  : addition\n- -  : soustraction\n- *  : multiplication\n- /  : division\n- ^  : puissance (ex: 2^3 = 8)\n- sqrt(x) : racine carrée\n- pi ou PI : π\n- n! : factorielle (ex: 5! = 120)\n- Fonctions : sin(x), cos(x), tan(x), log(x), abs(x), round(x), floor(x), ceil(x)",
+        "msg3": "❌ Erreur dans le calcul. Vérifie la formation."
+    },
+    "nick": {
+        "msg1": "✅ Pseudo changé",
+        "msg2": "❌ Impossible de changer le pseudo."
+    },
+    "ping": {
+        "msg1": "Mesure en cours...",
+        "msg2": "🤖 Latence du Bot",
+        "msg3": "🌐 Latence API",
+        "msg4": "⏱ Temps Réponse",
+        "msg5": "📊 Moyenne"
+    },
+    "react": {
+        "msg1": "emoji",
+        "msg2": "ID du message",
+        "msg3": "❌ Message introuvable.",
+        "msg4": "✅ Réaction [emoji] ajoutée au message [messageId]"
+    },
+    "spam": {
+        "msg1": "nombre",
+        "msg2": "texte",
+        "msg3": "❌ Texte invalide."
+    },
+    "stats": {
+        "msg1": "Je suis dans [serverCount] serveurs",
+        "msg2": "et je suis propriétaire de [ownedGuilds.size] serveurs : [ownedGuildNames]"
+    },
+    "status": {
+        "msg1": "✅ Statut changé en"
+    },
+    "stop": {
+        "msg1": "[ADMIN] Bot arrêté par [message.author.tag] ([message.author.id])"
+    },
+    "word": {
+        "msg1": "langue",
+        "msg2": "longueur",
+        "msg3": "❌ Langue invalide",
+        "msg4": "Choisis parmi",
+        "msg5": "❌ Le nombre doit être entre 1 et 30."
+    },
+    "constantes": {
+        "noadmin": "❌ Commande réservée.",
+        "usr": "user",
+        "and": "et",
+        "baduse": "❌ Utilisation incorrecte",
+        "question": "question",
+        "w": "semaines",
+        "d": "jours",
+        "h": "heures",
+        "m": "minutes",
+        "s": "secondes",
+        "onlymp": "❌ Uniquement en mp",
+        "onlyserv": "❌ Uniquement en serveur"
+    }
+}

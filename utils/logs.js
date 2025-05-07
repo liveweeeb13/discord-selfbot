@@ -37,8 +37,7 @@ function logMessage(message) {
         fs.writeFileSync(logFilePath, '', 'utf8');
     }
 
-    const logLine = `${timeStr} ${message.author.tag} (${message.author.id}) a exécuté la commande "${message.content}" sur le serveur ${message.guild?.name || 'DM'} (${message.guild?.id || 'Aucun'})\n`;
-
+    const logLine = `${timeStr} ${message.author.tag} (${message.author.id}) a exécuté la commande "${message.content}" sur le serveur ${message.guild ? message.guild.name : "DM"} ${message.guild ? message.guild.id : "Aucune"}\n`;
     fs.appendFileSync(logFilePath, logLine, 'utf8');
     console.log(logLine);
 }

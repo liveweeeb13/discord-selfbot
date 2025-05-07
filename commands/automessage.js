@@ -6,21 +6,24 @@ let timeout = null;
 
 module.exports = {
     name: 'automessage',
-    description: 'Envoie un message automatique.',
-    async execute(message, args) {
+    description: {
+        "fr": 'Envoie un message automatique.',
+        "en": "Send an automatic message."
+    },
+    async execute(message, args, client, lang, lf) {
         if (args.length < 3) {
-            return message.reply(`❌ Utilisation incorrecte : \`${config.prefix}${this.name} <message entre ""> <delay en secondes> <durée en minute>\``)
+            return message.reply(`${lf['constantes'].baduse} \`${config.prefix}${this.name} <${lf['automessage'].msg1.replace(/9/g, `"`)}> <${lf['automessage'].msg2}> <${lf['automessage'].msg3}>\``)
         }
 
         const delay = parseInt(args[args.length - 2], 10);
         const duration = parseInt(args[args.length - 1], 10);
 
         if (isNaN(delay) || delay <= 0 || delay > 3600) {
-            return message.reply('❌ Le délai doit être entre 1 et 3600 secondes.');
+            return message.reply(lf['automessage'].msg4);
         }
 
         if (isNaN(duration) || duration <= 0 || duration > 1000) {
-            return message.reply('❌ La durée doit être entre 1 et 1000 minutes.');
+            return message.reply(lf['automessage'].msg5);
         }
 
         const text = args.slice(0, -2).join(' ').replace(/"/g, "").replace(/'/g, "")
@@ -39,12 +42,24 @@ module.exports = {
             clearInterval(interval);
             interval = null;
 
-//          message.channel.send('🛑 Message automatique désactivé.');
-            console.log('🛑 AutoMessage désactivé automatiquement')
+          message.channel.send(lf['automessage'].msg6);
+            console.log(lf['automessage'].msg6)
         }, duration * 60 * 1000);
 
-//      message.reply(`✅ Envoi de `${text}` toutes les ${delay}s pendant ${duration} minute(s) `);
-        console.log('✅ AutoMessage activé')
+        message.reply(
+            lf['automessage'].msg7
+              .replace(/\[text\]/g, text)
+              .replace(/\[delay\]/g, delay)
+              .replace(/\[duration\]/g, duration)
+          );
+          
+        console.log(
+            lf['automessage'].msg7
+            .replace(/\[text\]/g, text)
+            .replace(/\[delay\]/g, delay)
+            .replace(/\[duration\]/g, duration)
+        );
+
         await logMessage(message)
     }
 };

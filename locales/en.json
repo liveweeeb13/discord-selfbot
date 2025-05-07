@@ -1,0 +1,148 @@
+{
+    "main": {
+        "msg1": "❌ An error occurred. This is not normal 😕",
+        "msg2": "Hello, I’m not a robot, but you should try to do"
+    },
+    "breathe": {
+        "msg1": "You just breathed. GG 🫁",
+        "msg2": "Breathing successful ✔️",
+        "msg3": "Don't forget to exhale too! 😮‍💨",
+        "msg4": "Inhale... exhale... There, you feel better 😌",
+        "msg5": "Well done, another breath!"
+    },
+    "botinfo": {
+        "msg1": "Here is my information:",
+        "msg2": "➡️ My prefix:",
+        "msg4": "➡️ I’ve been online since:",
+        "msg5": "➡️ I’m on version"
+    },
+    "8ball": {
+        "msg1": "Try later",
+        "msg2": "Try again",
+        "msg3": "No opinion",
+        "msg4": "It’s your destiny",
+        "msg5": "The die is cast",
+        "msg6": "One chance in two",
+        "msg7": "Ask again",
+        "msg8": "According to me, yes",
+        "msg9": "It’s certain",
+        "msg10": "Yes, absolutely",
+        "msg11": "You can count on it",
+        "msg12": "Without a doubt",
+        "msg13": "Very likely",
+        "msg14": "Yes",
+        "msg15": "It’s looking good",
+        "msg16": "It’s no",
+        "msg17": "Unlikely",
+        "msg18": "Don’t dream about it",
+        "msg19": "Don’t count on it",
+        "msg20": "Impossible"
+    },
+    "automessage": {
+        "msg1": "message between 99",
+        "msg2": "delay in seconds",
+        "msg3": "duration in minutes",
+        "msg4": "❌ The delay must be between 1 and 3600 seconds.",
+        "msg5": "❌ The duration must be between 1 and 1000 minutes.",
+        "msg6": "🛑 Automatic message disabled.",
+        "msg7": "✅ Sending `[text]` every [delay] sec for [duration] minute(s)"
+    },
+    "config": {
+        "msg1": "🔧 My prefix is",
+        "msg2": "⏱️ My response time is",
+        "msg3": "🔒 I’m in private mode",
+        "msg4": "🔓 I’m in public mode",
+        "msg5": "👤 Users who can use me in private mode:",
+        "msg6": "🛡️ Administrator users:"
+    },
+    "credits": {
+        "msg1": "Here are my credits:",
+        "msg2": "Developer",
+        "msg3": "Development help",
+        "msg4": "Source code"
+    },
+    "join": {
+        "msg1": "infinite_link",
+        "msg2": "⏳ **Validation pending** - Our team needs to manually review your access request.\n\n🔍 *Please wait while a human solves the CAPTCHA (average delay: 2-3 days).*\n\n✅ You will receive a notification once your access is approved."
+    },
+    "lang": {
+        "msg1": "Please choose a language from this list",
+        "msg2": "Your current language"
+    },
+    "love": {
+        "msg1": "user",
+        "msg2": "❌ You can't compare the same person twice!",
+        "msg3": "are compatible at"
+    },
+    "hack": {
+        "msg1": "❌ Can't hack me! 😎",
+        "msg2": "❌ Do you really want to hack yourself? 🤔",
+        "msg3": "💻 Initializing hack on",
+        "msg4": "🔍 Analyzing system of",
+        "msg5": "🛠️ Exploiting security flaws...",
+        "msg6": "📡 Connecting to main server...",
+        "msg7": "🔑 Attempting password recovery",
+        "msg8": "💾 Downloading sensitive data...",
+        "msg9": "🍟 Injecting fries into the system... 🍟",
+        "msg10": "⚠️ Detected by antivirus!",
+        "msg11": "❌ Hack interrupted. [target.username] is too strong!"
+    },
+    "maths": {
+        "msg1": "calculation or help",
+        "msg2": "📘 Help: Command !math\n\nSyntax: !math <expression>\n\nSupported operations:\n- +  : addition\n- -  : subtraction\n- *  : multiplication\n- /  : division\n- ^  : power (e.g., 2^3 = 8)\n- sqrt(x) : square root\n- pi or PI : π\n- n! : factorial (e.g., 5! = 120)\n- Functions: sin(x), cos(x), tan(x), log(x), abs(x), round(x), floor(x), ceil(x)",
+        "msg3": "❌ Error in calculation. Check the syntax."
+    },
+    "nick": {
+        "msg1": "✅ Nickname changed",
+        "msg2": "❌ Could not change the nickname."
+    },
+    "ping": {
+        "msg1": "Measuring...",
+        "msg2": "🤖 Bot latency",
+        "msg3": "🌐 API latency",
+        "msg4": "⏱ Response time",
+        "msg5": "📊 Average"
+    },
+    "react": {
+        "msg1": "emoji",
+        "msg2": "Message ID",
+        "msg3": "❌ Message not found.",
+        "msg4": "✅ Reaction [emoji] added to message [messageId]"
+    },
+    "spam": {
+        "msg1": "number",
+        "msg2": "text",
+        "msg3": "❌ Invalid text."
+    },
+    "stats": {
+        "msg1": "I am in [serverCount] servers",
+        "msg2": "and I own [ownedGuilds.size] servers: [ownedGuildNames]"
+    },
+    "status": {
+        "msg1": "✅ Status changed to"
+    },
+    "stop": {
+        "msg1": "[ADMIN] Bot stopped by [message.author.tag] ([message.author.id])"
+    },
+    "word": {
+        "msg1": "language",
+        "msg2": "length",
+        "msg3": "❌ Invalid language",
+        "msg4": "Choose from",
+        "msg5": "❌ The number must be between 1 and 30."
+    },
+    "constantes": {
+        "noadmin": "❌ Command reserved.",
+        "usr": "user",
+        "and": "and",
+        "baduse": "❌ Incorrect usage",
+        "question": "question",
+        "w": "weeks",
+        "d": "days",
+        "h": "hours",
+        "m": "minutes",
+        "s": "seconds",
+        "onlymp": "❌ Only in DMs",
+        "onlyserv": "❌ Only in server"
+    }
+}

@@ -18,3 +18,5 @@ dist
 
 # Non-example configs
 config.*
+
+logs/*.log

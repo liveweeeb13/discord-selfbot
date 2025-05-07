@@ -3,23 +3,24 @@ const config = require('../config.json')
 
 module.exports = {
     name: 'join',
-    description: 'Rejoint votre serveur Discord',
-    async execute(message) {
+    description: {
+        fr: 'Rejoint un serveur Discord',
+        en: 'Join a Discord server'
+    },
+    async execute(message, args, client,lang, lf) {
         function isValidInvite(url) {
             return url.includes('discord.gg') || url.includes('discord.com/invite');
         }
 
         if (message.guild) {
-            return message.reply('❌ Uniquement en mp') 
+            return message.reply(lf['constantes'].onlymp) 
         }
-
-        const args = message.content.split(' ').slice(1);
 
         if (args.length === 0 || !isValidInvite(args[0])) {
-           return message.reply(`❌ Utilisation incorrecte : \`${config.prefix}${this.name} <lien_infini>\``) 
+           return message.reply(`${lf['constantes'].baduse} \`${config.prefix}${this.name} <${lf['join'].msg1}>\``) 
         }
 
-        message.reply(`⏳ **Validation en attente** - Notre équipe doit vérifier manuellement votre demande d'accès.\n\n🔍 *Merci de patienter le temps qu\'un humain résolve le CAPTCHA (délai moyen : 2-3 jours).*\n\n✅ Vous recevrez une notification dès que votre accès sera approuvé.`);
+        message.reply(lf['join'].msg2);
         await logMessage(message);
     }
 };

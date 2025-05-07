@@ -3,24 +3,26 @@ const logMessage = require('../utils/logs');
 
 module.exports = {
     name: 'stop',
-    description: 'Arrête le bot (admin seulement)',
+    description: {
+        fr: 'Arrête le bot (admins seulement)',
+        en: 'Stop the bot (only admins)'
+    },
     async execute(message) {
         if (!config.admin_id.includes(message.author.id)) {
-            return // message.reply('❌ Commande réservée.');
+            return// message.reply('❌ Commande réservée.');
         }
 
         try {
-            //  await message.reply('🛑 Arrêt du bot...');
             await logMessage(message);
 
-            console.log(`\n[ADMIN] Bot arrêté par ${message.author.tag} (${message.author.id})`);
+            console.log(`\n ${lf["status"].msg1.replace(/\[[message.author.tag]\]/g, message.author.tag).replace(/\[[message.author.id]\]/g, message.author.id)}`);
+      
             setTimeout(() => {
                 process.exit(1);
             }, 2000);
 
         } catch (err) {
-            console.error('Erreur lors de l\'arrêt du bot :', err);
-            message.reply('❌ Échec');
+           return message.reply('❌');
         }
     }
 };

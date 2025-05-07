@@ -4,59 +4,73 @@ const client = new Client();
 const fs = require('fs');
 const path = require('path');
 // FUNCTION &
-const sensibles = require('./sensibles.json')
-const { logMessage } = require('./utils/logs')
+const sensibles = require('./sensibles.json');
+const logMessage = require('./utils/logs');
 const config = require('./config.json');
 
+const langDbPath = path.join(__dirname, 'db', 'lang.json');
+function getLangDb() {
+    if (!fs.existsSync(langDbPath)) {
+        fs.writeFileSync(langDbPath, JSON.stringify({ fr: [], en: [] }, null, 0), 'utf-8');
+    }
+    return JSON.parse(fs.readFileSync(langDbPath, 'utf-8'));
+}
+function saveLangDb(db) {
+    fs.writeFileSync(langDbPath, JSON.stringify(db, null, 0), 'utf-8');
+}
+function getUserLang(userId, db) {
+    for (const lang of Object.keys(db)) {
+        if (db[lang].includes(userId)) return lang;
+    }
+    return null;
+}
+function setUserLang(userId, lang, db) {
+    for (const l of Object.keys(db)) {
+        db[l] = db[l].filter(id => id !== userId);
+    }
+    if (!db[lang]) db[lang] = [];
+    db[lang].push(userId);
+}
 
-// Chargement des commandes
-console.log('🔄 Chargement des commandes...');
-
+// Loading commands
+console.log('🔄 Loading commands...');
 const commandFiles = fs.readdirSync(path.join(__dirname, 'commands')).filter(file => file.endsWith('.js'));
 const commands = new Map();
 commandFiles.forEach(file => {
     try {
         const command = require(`./commands/${file}`);
-        
         if (command.name && typeof command.execute === 'function') {
             commands.set(command.name, command);
             console.log(`✅ Commande chargée : ${command.name}`);
-            
             if (Array.isArray(command.aliases)) {
                 command.aliases.forEach(alias => {
                     if (!commands.has(alias)) {
                         commands.set(alias, command);
-                        console.log(`↪️ Alias ajouté : ${alias} -> ${command.name}`);
-                    } else {
-                        // console.warn(`⚠️ Alias ignoré : ${alias}`);
+                        console.log(`↪️ Alias added : ${alias} -> ${command.name}`);
                     }
                 });
             } else if (typeof command.aliases === 'string') {
                 const alias = command.aliases;
                 if (!commands.has(alias)) {
                     commands.set(alias, command);
-                    console.log(`↪️ Alias ajouté : ${alias} -> ${command.name}`);
-                } else {
-                    // console.warn(`⚠️ Alias ignoré : ${alias}`);
+                    console.log(`↪️ Alias added : ${alias} -> ${command.name}`);
                 }
             }
         } else {
-            console.warn(`⚠️ Fichier ignoré : ${file}`);
+            console.warn(`⚠️ File ignored : ${file}`);
         }
     } catch (err) {
-        console.error(`❌ Erreur de chargement ${file} :`, err);
+        console.error(`❌ Loading error ${file} :`, err);
     }
 });
-
-console.log(`📦 ${commands.size} commandes chargees.\n`);
-console.warn('Connection a Discord...')
+console.log(`📦 ${commands.size} commands loaded.\n`);
+console.warn('Connecting to Discord...');
 
 // Prêt
 client.on('ready', () => {
     console.clear();
-    console.log(`✅ ${client.user.username} est prêt !`);
+    console.log(`✅ ${client.user.username} is ready !`);
 });
-
 
 // Gestion des commandes
 client.on('messageCreate', async (message) => {
@@ -69,7 +83,6 @@ client.on('messageCreate', async (message) => {
 
     const isAuthorized = config.authorized_id.includes(message.author.id) || config.admin_id.includes(message.author.id);
     if (config.just_usable_by_me && !isAuthorized) {
-        console.log(`❌ Interaction non autorisée : ${message.author.username} dans ${message.guild ? message.guild.name : "DM"} | Message : ${message.content}`);
         return;
     }
 
@@ -81,46 +94,66 @@ client.on('messageCreate', async (message) => {
 
         setTimeout(async () => {
             try {
-                await command.execute(message, args);
+                let db = getLangDb();
+                let userLang = getUserLang(message.author.id, db);
+                if (!userLang) {
+                    setUserLang(message.author.id, config.defaultLang || "fr", db);
+                    saveLangDb(db);
+                    userLang = config.defaultLang || "fr";
+                }
+                let langPath = path.join(__dirname, 'locales', `${userLang}.json`);
+                let langfile = JSON.parse(fs.readFileSync(langPath, 'utf8'));
+
+                await command.execute(message, args, client, userLang, langfile);
             } catch (err) {
-                console.error(`❌ Erreur lors de l'exécution de "${commandName}" :`, err);
-                message.reply('❌ Une erreur est survenue. Ce n\'est pas normal 😕');
+                let db = getLangDb();
+                let userLang = getUserLang(message.author.id, db);
+                if (!userLang) {
+                    setUserLang(message.author.id, config.defaultLang || "en", db);
+                    saveLangDb(db);
+                    userLang = config.defaultLang || "en";
+                }
+                let langPath = path.join(__dirname, 'locales', `${userLang}.json`);
+                let languageFile = JSON.parse(fs.readFileSync(langPath, 'utf8'));
+                console.error(`❌ Error while executing "${commandName}" :`, err);
+                message.reply(`${languageFile["main"].msg1}`);
+
             }
         }, delay);
     } catch (error) {
-        console.error(`❌ Erreur générale dans le gestionnaire de message :`, error);
+        console.error(`❌ General error in the commands handler :`, error);
     }
 });
 
-// Gestion des messages
+// Message Handler
 client.on('messageCreate', async (message) => {
-    if (message.author.bot) return
+    if (message.author.bot) return;
     const isAuthorized = config.authorized_id.includes(message.author.id) || config.admin_id.includes(message.author.id);
     if (config.just_usable_by_me && !isAuthorized) {
-        //     console.log(`❌ Interaction non autorisée : ${message.author.username} dans ${message.guild ? message.guild.name : "DM"} | Message : ${message.content}`);
         return;
     }
 
     if (message.content.toLowerCase() === `<@${client.user.id}>`) {
-        message.reply(`Salut je ne suis pas un robot mais tu devrais essayer de faire \`${config.prefix}help\``);
+        const db = getLangDb();
+        let userLang = getUserLang(message.author.id, db);
+        let langPath = path.join(__dirname, 'locales', `${userLang}.json`);
+        let languageFile = JSON.parse(fs.readFileSync(langPath, 'utf8'));
 
-        await logMessage(message)
+        
+        message.reply(`${languageFile["main"].msg2} \`${config.prefix}help\``);
     }
-})
+});
 
 // HANDLERS ANTI-CRASH
 process.on("unhandledRejection", (reason, promise) => {
     console.log(reason, "\n", promise);
 });
-
 process.on("uncaughtException", (err, origin) => {
     console.log(err, "\n", origin);
 });
-
 process.on("uncaughtExceptionMonitor", (err, origin) => {
     console.log(err, "\n", origin);
 });
-
 process.on("warning", (warn) => {
     console.log(warn);
 });

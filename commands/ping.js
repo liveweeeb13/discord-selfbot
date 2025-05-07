@@ -2,13 +2,16 @@ const logMessage = require('../utils/logs')
 
 module.exports = {
     name: 'ping',
-    description: 'Affiche les latences.',
-    async execute(message) {
+    description: {
+        fr: 'Affiche les latences.',
+        en: 'Shows latency'
+    },
+    async execute(message,args,c,lang,lf) {
         const startTime = Date.now();
         const initialPing = Math.abs(Date.now() - message.createdTimestamp);
         
         await message.channel.sendTyping();
-        const testingMessage = await message.reply({ content: '*Mesure en cours...*' });
+        const testingMessage = await message.reply({ content: `*${lf['ping'].msg1}*` });
 
         const endTime = Date.now();
         const botPing = Math.abs(endTime - startTime);
@@ -45,7 +48,7 @@ module.exports = {
                 1: { hex: '#ffd817', square: '🟨', circle: '🟡' },
                 2: { hex: '#f99325', square: '🟧', circle: '🟠' },
                 3: { hex: '#d00f0f', square: '🟥', circle: '🔴' },
-                4: { hex: '#7a0606', square: '⬛', circle: '⚫' }
+                4: { hex: '#400106', square: '⬛', circle: '⚫' }
             };
 
             switch (type) {
@@ -70,10 +73,10 @@ module.exports = {
 
         await message.reply({
             content: [
-                `🤖 Latence du Bot: \`${botPing}ms\` ${emojis.bot}`,
-                `🌐 Latence API: \`${apiPing}ms\` ${emojis.api}`,
-                `⏱ Temps Réponse: \`${initialPing}ms\` ${emojis.time}`,
-       //       `📊 Moyenne: \`${avgPing}ms\` ${emojis.avg}`
+                `${lf['ping'].msg2}: \`${botPing}ms\` ${emojis.bot}`,
+                `${lf['ping'].msg3}: \`${apiPing}ms\` ${emojis.api}`,
+                `${lf['ping'].msg4}: \`${initialPing}ms\` ${emojis.time}`,
+       //       `${lf['ping'].msg5}: \`${avgPing}ms\` ${emojis.avg}`
             ].join('\n'),
             files: [pingImage]
         }).then(() => testingMessage.delete());

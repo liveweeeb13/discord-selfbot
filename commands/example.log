@@ -1,9 +1,13 @@
 const logMessage = require('../utils/logs')
+const config = require('../config.json')
 
 module.exports = {
     name: 'name',
-    description: 'description',
-    async execute(message) {
+    description: {
+    "fr": 'description',
+    "en": "pareil"
+    },
+    async execute(message, args, client, lang) {
        
     }
 };

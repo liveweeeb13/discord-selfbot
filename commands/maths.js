@@ -4,30 +4,18 @@ const config = require('../config.json')
 
 module.exports = {
     name: "maths",
-    aliases: "math",
-    description: "🆕 Fais un calcul.",
-    async execute(message, args) {
+    aliases: ["math", "calcul"],
+    description: {
+        fr: "Fait un calcul.",
+        en: "Do a calculation."
+    },
+    async execute(message, args,c,lang,lf) {
         if (!args.length) {
-            return message.reply(`❌ Utilisation incorrecte : \`${config.prefix}${this.name} <calcul ou help>\``)
+            return message.reply(`${lf['constantes'].baduse} \`${config.prefix}${this.name} <${lf['maths'].msg1}>\``)
         }
 
         if (args[0].toLowerCase() === "help") {
-            return message.reply(`\`\`\`
-📘 Aide : Commande !math
-
-Syntaxe : !math <expression>
-
-Opérations supportées :
-- +  : addition
-- -  : soustraction
-- *  : multiplication
-- /  : division
-- ^  : puissance (ex: 2^3 = 8)
-- sqrt(x) : racine carrée
-- pi ou PI : π
-- n! : factorielle (ex: 5! = 120)
-- Fonctions : sin(x), cos(x), tan(x), log(x), abs(x), round(x), floor(x), ceil(x)
-\`\`\` `);
+            return message.reply(`\`\`\`${lf['maths'].msg2}\`\`\``);
         }
 
         const input = args.join(" ")
@@ -38,7 +26,7 @@ Opérations supportées :
             const result = math.evaluate(input);
             message.reply(`\`${result}\``);
         } catch (err) {
-            message.reply("❌ Erreur dans le calcul. Vérifie ta syntaxe.");
+            message.reply(lf['maths'].msg3);
         }
 
         await logMessage(message)
